@@ -1,14 +1,10 @@
-Certainly! Here’s a detailed **README.md** specifically for hosting a website on an **EC2 Linux instance using Apache** 
-
----
-
 # Host a Website on EC2 Linux Instance Using Apache
 
 This guide walks you through the process of hosting a static website on an **Amazon EC2 instance** running **Amazon Linux 2**. The website will be served using the **Apache HTTP server**.
 
 ## **Description**
 
-In this project, you'll launch an **EC2 instance** with **Amazon Linux 2**, install **Apache HTTP server**, and deploy a simple static website (HTML files). The website will be accessible through the public IP address or a custom domain name if desired.
+In this project, you'll launch an **EC2 instance** with **Amazon Linux 2**, install **Apache HTTP server**, deploy a simple static website (HTML files), and manage the website using **Git**.
 
 ## **Prerequisites**
 
@@ -19,6 +15,7 @@ Before you begin, ensure that you have the following:
 3. **SSH Key Pair**: You need an SSH key pair for secure access to your EC2 instance.
 4. **A Web Browser**: You'll need a browser to test your website by accessing the EC2 public IP.
 5. **Basic Linux and SSH Knowledge**: Comfort with terminal commands to interact with your EC2 instance.
+6. **Git Installed**: Ensure **Git** is installed on your local machine and EC2 instance.
 
 ## **Steps**
 
@@ -49,9 +46,9 @@ After your EC2 instance is running, you can connect to it using SSH:
      ```
    - Accept the SSH fingerprint if prompted to establish a secure connection.
 
-### 3. **Install Apache Web Server**
+### 3. **Install Apache Web Server and Git**
 
-Once you're connected to your EC2 instance, you'll need to install the **Apache HTTP server**.
+Once you're connected to your EC2 instance, you'll need to install the **Apache HTTP server** and **Git**.
 
 1. **Update the System**:
    ```bash
@@ -59,10 +56,14 @@ Once you're connected to your EC2 instance, you'll need to install the **Apache 
    ```
 
 2. **Install Apache**:
-   - To install the **Apache HTTP server**, use the following command:
-     ```bash
-     sudo yum install httpd -y
-     ```
+   ```bash
+   sudo yum install httpd -y
+   ```
+
+3. **Install Git**:
+   ```bash
+   sudo yum install git -y
+   ```
 
 ### 4. **Start Apache Web Server**
 
@@ -78,44 +79,45 @@ After installation, start the Apache service and enable it to automatically star
    sudo systemctl enable httpd
    ```
 
-### 5. **Verify Apache Installation**
+### 5. **Clone Website Repository from GitHub**
 
-To verify that Apache is working:
+To deploy the website, you need to clone the repository containing your website files.
 
-1. **Check Apache Status**:
+1. **Navigate to the Apache root directory**:
    ```bash
-   sudo systemctl status httpd
-   ```
-   The output should show that the **Apache** service is active (running).
-
-2. **Access the Website**:
-   - Open your browser and navigate to the **Public IP** of your EC2 instance:
-     ```
-     http://<ec2-public-ip>
-     ```
-   - You should see the default Apache test page, indicating that Apache is installed and running.
-
-### 6. **Deploy Your Website Files**
-
-Now that Apache is set up, it’s time to deploy your website’s files (e.g., `index.html`, `style.css`, etc.).
-
-1. **Upload Website Files to the Server**:
-   - You can use **SCP** (Secure Copy) to upload your website files to the EC2 instance. For example:
-     ```bash
-     scp -i /path/to/your-key.pem index.html ec2-user@<ec2-public-ip>:/var/www/html/
-     ```
-   - Alternatively, you can create the files directly on the EC2 instance using a text editor like `nano` or `vi`.
-
-2. **Move Files to the Correct Directory**:
-   By default, Apache serves content from `/var/www/html/`. Ensure your `index.html` and other web files are in this directory:
-   ```bash
-   sudo mv /path/to/your/index.html /var/www/html/
+   cd /var/www/html/
    ```
 
-3. **Ensure Proper Permissions**:
-   Apache must have permission to read the files. Set the correct ownership and permissions:
+2. **Clone the GitHub Repository**:
    ```bash
-   sudo chown -R apache:apache /var/www/html/*
+   sudo git clone <your-git-repository-url> .
+   git clone https://github.com/YogitaBadhe/AWS_EC2_Website_Project.git
+   cd AWS_EC2_Website_Project
+   ```
+
+3. **Set the Correct Permissions**:
+   ```bash
+   sudo chown -R apache:apache /var/www/html/
+   ```
+
+### 6. **Configure Git to Push Changes**
+
+1. **Set Up Git Configuration**:
+   ```bash
+   git config --global user.name "YogitaBadhe"
+   git config --global user.email "ybadhe0990@gmail.com"
+   ```
+
+2. **Make Changes to the Website**:
+   ```bash
+   index.html
+   ```
+
+3. **Commit and Push Changes**:
+   ```bash
+   git add .
+   git commit -m "Initial website commit"
+   git push origin main
    ```
 
 ### 7. **Configure the Security Group**
@@ -126,10 +128,6 @@ To allow access to your website, make sure your EC2 instance’s security group 
    - Go to **EC2 Console > Security Groups**.
    - Select the security group associated with your EC2 instance.
    - Ensure there’s an inbound rule allowing **HTTP (Port 80)** from **0.0.0.0/0** (for public access) or your IP range.
-   - If you don’t already have this rule, add the following:
-     - **Type**: HTTP
-     - **Port Range**: 80
-     - **Source**: 0.0.0.0/0 (or a specific IP range)
 
 ### 8. **Access the Website**
 
@@ -170,7 +168,9 @@ If you have a domain name and want to map it to your EC2 instance:
 - [Amazon EC2 Documentation](https://docs.aws.amazon.com/ec2/index.html)
 - [Apache HTTP Server Documentation](https://httpd.apache.org/docs/)
 - [Amazon Linux 2 AMI Documentation](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/amazon-linux-ami-versions.html)
+- [GitHub Documentation](https://docs.github.com/en/get-started)
 
 ---
 
-This **README.md** provides you with step-by-step instructions to host a static website on an EC2 instance running **Amazon Linux 2** and using the **Apache HTTP server**. Let me know if you need additional features or assistance!
+This **README.md** provides step-by-step instructions to host a static website on an EC2 instance running **Amazon Linux 2**, using **Apache HTTP server**, and managing the website with **Git**.
+

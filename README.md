@@ -1,4 +1,4 @@
-Certainly! Here’s a detailed **README.md** specifically for hosting a website on an **EC2 Linux instance using Apache** (focusing on **Amazon Linux 2**, not Ubuntu).
+Certainly! Here’s a detailed **README.md** specifically for hosting a website on an **EC2 Linux instance using Apache** 
 
 ---
 

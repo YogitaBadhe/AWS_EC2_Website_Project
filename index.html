@@ -5,14 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Bookstore</title>
     <style>
+        /* Global Styles */
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
             margin: 0;
             padding: 0;
+            background-color: #f4f4f9;
         }
 
+        /* Header Styles */
         header {
             background-color: #4CAF50;
             color: white;
@@ -20,24 +21,41 @@
             text-align: center;
         }
 
+        /* Navigation Styles */
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+        }
+
+        nav a {
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        /* Book Listing Styles */
         .container {
             width: 80%;
-            margin: 0 auto;
-            padding: 20px;
+            margin: 20px auto;
         }
 
         .book-list {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
         }
 
         .book-item {
             background-color: white;
             border: 1px solid #ddd;
             border-radius: 8px;
-            margin: 10px;
-            width: 250px;
             padding: 15px;
             text-align: center;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -72,69 +90,82 @@
         .book-item button:hover {
             background-color: #45a049;
         }
+
+        /* Footer Styles */
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+        }
     </style>
 </head>
 <body>
 
 <header>
     <h1>Welcome to My Bookstore!</h1>
-    <p>Explore our collection of amazing books</p>
+    <p>Your favorite place to buy books online</p>
 </header>
+
+<nav>
+    <a href="#">Home</a>
+    <a href="#">Shop</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+</nav>
 
 <div class="container">
     <h2>Featured Books</h2>
     <div class="book-list">
+        <!-- Book 1 -->
         <div class="book-item">
-            <img src="https://via.placeholder.com/150" alt="Book Cover">
+            <img src="https://via.placeholder.com/200x300" alt="Book Cover">
             <h3>The Magical Kingdom of Eldora</h3>
             <p>Author: Alice Hart</p>
             <p>Price: $19.99</p>
-            <button>Buy Now</button>
+            <button onclick="addToCart('The Magical Kingdom of Eldora')">Add to Cart</button>
         </div>
 
+        <!-- Book 2 -->
         <div class="book-item">
-            <img src="https://via.placeholder.com/150" alt="Book Cover">
+            <img src="https://via.placeholder.com/200x300" alt="Book Cover">
             <h3>The Adventures of Willow and Finn</h3>
             <p>Author: John Doe</p>
             <p>Price: $14.99</p>
-            <button>Buy Now</button>
+            <button onclick="addToCart('The Adventures of Willow and Finn')">Add to Cart</button>
         </div>
 
+        <!-- Book 3 -->
         <div class="book-item">
-            <img src="https://via.placeholder.com/150" alt="Book Cover">
+            <img src="https://via.placeholder.com/200x300" alt="Book Cover">
             <h3>The Secret of the Moonlit Forest</h3>
             <p>Author: Emma Bright</p>
             <p>Price: $22.99</p>
-            <button>Buy Now</button>
+            <button onclick="addToCart('The Secret of the Moonlit Forest')">Add to Cart</button>
         </div>
 
+        <!-- Book 4 -->
         <div class="book-item">
-            <img src="https://via.placeholder.com/150" alt="Book Cover">
-            <h3>The Girl Who Spoke with Stars</h3>
-            <p>Author: Sarah Miles</p>
-            <p>Price: $18.50</p>
-            <button>Buy Now</button>
-        </div>
-
-        <div class="book-item">
-            <img src="https://via.placeholder.com/150" alt="Book Cover">
+            <img src="https://via.placeholder.com/200x300" alt="Book Cover">
             <h3>The Dragon's Whisper</h3>
             <p>Author: Robert King</p>
             <p>Price: $25.00</p>
-            <button>Buy Now</button>
-        </div>
-
-        <div class="book-item">
-            <img src="https://via.placeholder.com/150" alt="Book Cover">
-            <h3>The Quest for the Lost Crystal</h3>
-            <p>Author: Jessica Turner</p>
-            <p>Price: $17.99</p>
-            <button>Buy Now</button>
+            <button onclick="addToCart('The Dragon\'s Whisper')">Add to Cart</button>
         </div>
 
     </div>
 </div>
 
+<footer>
+    <p>&copy; 2025 My Bookstore. All rights reserved.</p>
+</footer>
+
+<script>
+    // JavaScript for adding books to the cart
+    function addToCart(bookName) {
+        alert(bookName + ' has been added to your cart!');
+    }
+</script>
+
 </body>
 </html>
-
